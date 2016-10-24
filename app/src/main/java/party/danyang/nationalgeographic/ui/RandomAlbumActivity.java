@@ -30,6 +30,7 @@ import party.danyang.nationalgeographic.databinding.ActivityRandomAlbumBinding;
 import party.danyang.nationalgeographic.model.random.Random;
 import party.danyang.nationalgeographic.net.random.NGApi_random;
 import party.danyang.nationalgeographic.net.random.RamdomImgParser;
+import party.danyang.nationalgeographic.utils.DownloadMangerResolver;
 import party.danyang.nationalgeographic.utils.NetUtils;
 import party.danyang.nationalgeographic.utils.SaveImage;
 import party.danyang.nationalgeographic.utils.SettingsModel;
@@ -274,7 +275,7 @@ public class RandomAlbumActivity extends SwipeBackActivity {
     }
 
     private void showSaveImgDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogTheme);
         builder.setMessage(R.string.save_img);
         builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
             @Override
@@ -283,17 +284,13 @@ public class RandomAlbumActivity extends SwipeBackActivity {
                 saveImg();
             }
         });
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
+        builder.setNegativeButton(R.string.cancel, null);
         builder.show();
     }
 
     private void saveImg() {
-        SaveImage.saveImg(this, binding.getRoot(), String.valueOf(randomId) + ".jpg", url);
+        if (DownloadMangerResolver.resolve(this))
+            SaveImage.saveImg(this, binding.getRoot(), String.valueOf(randomId) + ".jpg", url);
     }
 
     @Override
@@ -315,6 +312,10 @@ public class RandomAlbumActivity extends SwipeBackActivity {
             }
         } else if (id == R.id.action_refresh) {
             getPic(getRandomInt());
+        } else if (id == R.id.action_share) {
+            if (random == null || TextUtils.isEmpty(random.getTitle()) || TextUtils.isEmpty(url))
+                return;
+            Utils.shareItem(this, url, random.getTitle(), null, binding.getRoot());
         }
     }
 

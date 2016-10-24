@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.squareup.picasso.Callback;
 
@@ -12,9 +13,10 @@ import java.util.List;
 
 import party.danyang.nationalgeographic.BuildConfig;
 import party.danyang.nationalgeographic.R;
+import party.danyang.nationalgeographic.adapter.base.BaseAdapter;
 import party.danyang.nationalgeographic.databinding.ItemDetailBinding;
 import party.danyang.nationalgeographic.model.album.Picture;
-import party.danyang.nationalgeographic.utils.SettingsModel;
+import party.danyang.nationalgeographic.utils.Utils;
 import party.danyang.nationalgeographic.utils.singleton.PicassoHelper;
 
 /**
@@ -41,13 +43,7 @@ public class AlbumDetailAdapter extends BaseAdapter<Picture> {
     @Override
     public void setBingVariables(ViewDataBinding binding, int position) {
         final ItemDetailBinding bd = (ItemDetailBinding) binding;
-        String url = get(position).getUrl();
-        if (SettingsModel.getAccelerate(bd.iv.getContext())) {
-            if (url.startsWith("http://pic01.bdatu.com/Upload/picimg/")) {
-                int length = SettingsModel.getAccelerateImageSize(bd.iv.getContext());
-                url = url.replace("http://pic01.bdatu.com/Upload/picimg/", "https://ocgasl9gh.qnssl.com/") + "?imageMogr2/thumbnail/" + length + "x" + length;
-            }
-        }
+        String url = Utils.convertImageUrl(bd.iv.getContext(), get(position).getUrl());
         PicassoHelper.getInstance(bd.iv.getContext()).load(url)
                 .error(R.mipmap.nat_geo_480)
                 .noFade()
@@ -63,8 +59,7 @@ public class AlbumDetailAdapter extends BaseAdapter<Picture> {
 
                     @Override
                     public void onError() {
-                        if (BuildConfig.LOG_DEBUG)
-                            Log.e("Picasso load image", "why...");
+                        bd.iv.setVisibility(View.GONE);
                     }
                 });
     }

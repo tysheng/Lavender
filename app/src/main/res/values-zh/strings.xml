@@ -3,8 +3,10 @@
     <string name="exception_content_null">获取的数据是空的唉</string>
     <string name="action_yourshotlink">外部链接</string>
     <string name="action_refresh">随机一个</string>
+    <string name="action_share">分享</string>
     <string name="maybe_no_more">可能是没有更多了哦</string>
     <string name="error">出现了一个连我都布吉岛的错误呢</string>
+    <string name="error_share">分享图片失败了呢</string>
     <string name="not_legal_yourshotlink">没有有效的外部链接，跳转不过去55555~</string>
     <string name="save_in_file">图片已保存至 %s 文件夹~</string>
     <string name="save_img_with_resolution">保存图片 [%1$d * %2$d]</string>
@@ -16,6 +18,7 @@
     <string name="permission_denied">权限都没有，到达不了sd卡，哼哼~\(≧▽≦)/~</string>
     <string name="cannot_download_pic">下载图片出错</string>
     <string name="click_ono_more_to_exit">再按一次退出Lavender</string>
+    <string name="enable_download_manager">找不到下载管理器惹，下载做不到啊T.T</string>
 
 
     <string name="settings_title_conventional">常规</string>
@@ -30,6 +33,7 @@
     <string name="settings_clear_cache">清理缓存</string>
     <string name="settings_check_update">检查更新</string>
     <string name="settings_report">联系我</string>
+    <string name="settings_donate">捐助我</string>
     <string name="settings_go_to_market">前往应用商店评分</string>
     <string name="settings_app_info">查看Lavender的应用信息</string>
     <string name="settings_about">关于</string>
@@ -43,7 +47,6 @@
     <string name="setting_dialog_custom_image_title">自定义图片较长边尺寸</string>
     <string name="setting_dialog_custom_image_content">输入较长边长度,获取的图片的较长边将不会超出这个数字</string>
     <string name="setting_dialog_custom_image_hint">建议800到2000</string>
-
 
     <string name="single_pic_us">每日一图</string>
     <string name="group_pic">每日精选</string>

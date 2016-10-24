@@ -68,16 +68,6 @@ public class AboutActivity extends ToolbarActivity {
             }
 
             @Override
-            public void onInternediateFromExpand() {
-
-            }
-
-            @Override
-            public void onInternediateFromCollapsed() {
-
-            }
-
-            @Override
             public void onInternediate() {
                 setTitle(null);
                 binding.toolbarLayout.setTitle(null);
@@ -87,14 +77,9 @@ public class AboutActivity extends ToolbarActivity {
     }
 
     public void onClickUseAttention(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogTheme);
         builder.setMessage(R.string.about_attention_content);
-        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
+        builder.setPositiveButton(R.string.ok, null);
         builder.show();
     }
 
@@ -124,12 +109,10 @@ public class AboutActivity extends ToolbarActivity {
     private int clickTime;
 
     public void onClickIcon(View view) {
-        Log.e("click", clickTime + "  ");
         if (System.currentTimeMillis() - lastClickTime < 800) {
             if (System.currentTimeMillis() - lastClickTime < 400) {
                 return;
             }
-            Log.e("click", clickTime + "  ");
             clickTime++;
             lastClickTime = System.currentTimeMillis();
             if (clickTime == 5) {
